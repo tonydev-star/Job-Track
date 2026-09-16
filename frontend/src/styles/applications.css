@@ -1,0 +1,383 @@
+@import "./variables.css";
+
+/* ---------- Page header / toolbar ---------- */
+
+.page-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.page-header-row h1 {
+  font-size: 22px;
+}
+
+.page-header-row p {
+  color: var(--text-muted);
+  font-size: 13.5px;
+  margin-top: var(--space-1);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.toolbar-search {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+  max-width: 320px;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-search svg {
+  position: absolute;
+  left: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.toolbar-search input {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 9px 12px 9px 36px;
+  font-size: 13px;
+}
+
+.toolbar-search input:focus-visible {
+  border-color: var(--accent-border);
+  outline-offset: 0;
+}
+
+.filter-pills {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: all var(--duration-fast) var(--ease);
+}
+
+.filter-pill:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.filter-pill[aria-pressed="true"] {
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+  color: var(--text-primary);
+}
+
+/* ---------- Status badge ---------- */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.status-badge--applied {
+  background: var(--status-applied-bg);
+  color: var(--status-applied);
+}
+.status-badge--applied .status-badge-dot {
+  background: var(--status-applied);
+}
+
+.status-badge--interview {
+  background: var(--status-interview-bg);
+  color: var(--status-interview);
+}
+.status-badge--interview .status-badge-dot {
+  background: var(--status-interview);
+}
+
+.status-badge--offer {
+  background: var(--status-offer-bg);
+  color: var(--status-offer);
+}
+.status-badge--offer .status-badge-dot {
+  background: var(--status-offer);
+}
+
+.status-badge--rejected {
+  background: var(--status-rejected-bg);
+  color: var(--status-rejected);
+}
+.status-badge--rejected .status-badge-dot {
+  background: var(--status-rejected);
+}
+
+.status-badge--withdrawn {
+  background: var(--status-withdrawn-bg);
+  color: var(--status-withdrawn);
+}
+.status-badge--withdrawn .status-badge-dot {
+  background: var(--status-withdrawn);
+}
+
+/* ---------- Table ---------- */
+
+.table-wrapper {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.applications-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.applications-table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.applications-table td {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+  vertical-align: middle;
+}
+
+.applications-table tr:last-child td {
+  border-bottom: none;
+}
+
+.applications-table tbody tr {
+  transition: background var(--duration-fast) var(--ease);
+}
+
+.applications-table tbody tr:hover {
+  background: var(--bg-surface-hover);
+}
+
+.cell-company {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.cell-muted {
+  color: var(--text-muted);
+}
+
+.row-actions {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.row-actions-trigger {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-actions-trigger:hover {
+  background: var(--bg-surface-raised);
+  color: var(--text-primary);
+}
+
+.row-actions-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 140px;
+  padding: var(--space-2);
+  z-index: 15;
+  animation: dropdown-in var(--duration-base) var(--ease);
+}
+
+.row-actions-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 7px var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+}
+
+.row-actions-menu button:hover {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.row-actions-menu button.danger {
+  color: var(--error);
+}
+
+.row-actions-menu button.danger:hover {
+  background: var(--status-rejected-bg);
+}
+
+/* ---------- Application cards (mobile) ---------- */
+
+.application-cards {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.application-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.application-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.application-card-company {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.application-card-title {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.application-card-location {
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+
+.application-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.application-card-actions {
+  display: flex;
+  gap: var(--space-2);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-3);
+}
+
+.application-card-actions button {
+  flex: 1;
+}
+
+/* ---------- Modal form ---------- */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.form-grid .field-full {
+  grid-column: 1 / -1;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.field input,
+.field select,
+.field textarea {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 11px;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  transition: border-color var(--duration-fast) var(--ease);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  border-color: var(--accent-border);
+  outline-offset: 0;
+}
+
+.field-error {
+  font-size: 12px;
+  color: var(--error);
+}
+
+.modal-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}

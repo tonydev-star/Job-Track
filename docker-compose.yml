@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  api:
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: "8080"
+      ENVIRONMENT: "development"
+      FRONTEND_URL: "http://localhost:5173"
+      FIREBASE_PROJECT_ID: "${FIREBASE_PROJECT_ID:-your-project-id}"
+      GOOGLE_APPLICATION_CREDENTIALS: "${GOOGLE_APPLICATION_CREDENTIALS:-}"
+    restart: unless-stopped

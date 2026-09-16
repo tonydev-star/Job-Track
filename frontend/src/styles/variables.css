@@ -1,0 +1,72 @@
+:root {
+  /* Surfaces */
+  --bg-primary: #0a0c11;
+  --bg-surface: #12141c;
+  --bg-surface-raised: #171a24;
+  --bg-surface-hover: #1c1f2b;
+  --border: #242836;
+  --border-strong: #323748;
+
+  /* Text */
+  --text-primary: #e9eaf2;
+  --text-secondary: #b3b7c6;
+  --text-muted: #767c8f;
+
+  /* Accent - indigo/violet, used deliberately, not everywhere */
+  --accent: #7c6ff0;
+  --accent-hover: #8f83f5;
+  --accent-soft: rgba(124, 111, 240, 0.14);
+  --accent-border: rgba(124, 111, 240, 0.35);
+
+  /* Status colors */
+  --status-applied: #6b93f5;
+  --status-applied-bg: rgba(107, 147, 245, 0.12);
+  --status-interview: #e0a94e;
+  --status-interview-bg: rgba(224, 169, 78, 0.12);
+  --status-offer: #4bc994;
+  --status-offer-bg: rgba(75, 201, 148, 0.12);
+  --status-rejected: #ea6f6f;
+  --status-rejected-bg: rgba(234, 111, 111, 0.12);
+  --status-withdrawn: #8890a3;
+  --status-withdrawn-bg: rgba(136, 144, 163, 0.12);
+
+  /* Semantic */
+  --success: #4bc994;
+  --warning: #e0a94e;
+  --error: #ea6f6f;
+
+  /* Typography */
+  --font-display: "Outfit", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.32);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+
+  /* Layout */
+  --sidebar-width: 232px;
+  --header-height: 64px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+}

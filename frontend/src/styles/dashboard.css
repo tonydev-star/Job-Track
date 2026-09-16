@@ -1,0 +1,150 @@
+@import "./variables.css";
+
+.dashboard-greeting {
+  margin-bottom: var(--space-8);
+}
+
+.dashboard-greeting h1 {
+  font-size: 24px;
+  margin-bottom: var(--space-2);
+}
+
+.dashboard-greeting p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+}
+
+.stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: border-color var(--duration-base) var(--ease);
+}
+
+.stat-card:hover {
+  border-color: var(--border-strong);
+}
+
+.stat-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-card-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.stat-card-label {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.dashboard-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.dashboard-section-header h2 {
+  font-size: 16px;
+}
+
+.dashboard-section-header a,
+.dashboard-section-header button {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.dashboard-section-header a:hover,
+.dashboard-section-header button:hover {
+  color: var(--text-primary);
+}
+
+.recent-list {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.recent-list-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.recent-list-row:last-child {
+  border-bottom: none;
+}
+
+.recent-list-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.recent-list-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.recent-list-company {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.recent-list-title {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.recent-list-date {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.dashboard-cta-row {
+  margin-top: var(--space-6);
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,0 +1,31 @@
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+frontend/.env.local
+backend/.env
+
+# Firebase and Google credentials
+service-account*.json
+firebase-service-account*.json
+google-credentials*.json
+*-service-account*.json
+firebase-debug.log
+.firebase/
+
+# Frontend dependencies and build output
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Backend build output
+backend/bin/
+backend/server
+
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+*.log
+*.tsbuildinfo
+README copy.md
