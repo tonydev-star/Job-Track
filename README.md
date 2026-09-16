@@ -1,733 +1,322 @@
-# 🚀 JobTrack
+ # JobTrack
 
-### A modern, secure, multi-user job application tracking platform.
+JobTrack is a full-stack job search tracker for managing applications, interviews, profile information, and job-search progress in one place.
 
-JobTrack helps job seekers organize, track, and manage their entire job search from one place — from the moment an application is submitted to interviews, offers, rejections, and follow-ups.
+The project contains:
 
-Built with **React, TypeScript, Go, Firebase Authentication, and Cloud Firestore**, JobTrack is designed around a secure multi-user architecture where every user's data is isolated and protected.
+- A React and TypeScript frontend built with Vite
+- Firebase Authentication for user accounts
+- Cloud Firestore for user-scoped profile and application data
+- A Go HTTP API with Firebase ID-token authentication
+- Firebase Hosting configuration for the production frontend
+- Docker configuration for running the Go API locally
 
----
+Live app: https://job-tracker-77.web.app
 
-## ✨ Why JobTrack?
+## Features
 
-Managing dozens of job applications across emails, spreadsheets, browser tabs, and notes can quickly become difficult.
+- Register and sign in with email and password
+- Reset forgotten passwords by email
+- User-specific profiles loaded from Firestore
+- Automatic country detection from the user's IP when no country is stored
+- Create, view, update, and delete job applications
+- Filter and track application statuses
+- Dashboard statistics and recent applications
+- Interview and company sections in the frontend
+- Persistent notification preferences stored in Firestore
+- Responsive desktop and mobile layout
+- Protected Firestore collections and protected Go API routes
 
-**JobTrack brings everything together.**
+## Technology Stack
 
-Track:
+### Frontend
 
-* 🏢 Companies
-* 💼 Job positions
-* 📍 Locations
-* 📅 Application dates
-* 🔄 Application status
-* 🎯 Interviews
-* 📝 Notes
-* 🔗 Job posting URLs
-* 📊 Job-search statistics
+- React 19
+- TypeScript
+- Vite
+- React Router
+- Firebase Web SDK
+- Cloud Firestore
+- Firebase Authentication
 
----
+### Backend
 
-## 🎯 Core Features
+- Go 1.22+
+- `net/http`
+- Firebase Admin SDK for Go
+- Cloud Firestore
+- Docker
 
-### 📊 Dashboard
-
-Get an overview of your job search at a glance.
-
-* Total applications
-* Applications in progress
-* Interviews
-* Offers
-* Rejections
-* Recent applications
-* Application activity
-
-### 💼 Application Tracking
-
-Create and manage job applications with:
-
-* Company
-* Job title
-* Location
-* Employment type
-* Application date
-* Status
-* Job URL
-* Personal notes
-
-Supported statuses:
+## Project Structure
 
 ```text
-Applied
-Interview
-Offer
-Rejected
-Withdrawn
-```
-
-### 🎤 Interview Management
-
-Keep interview information organized alongside your applications.
-
-Track:
-
-* Company
-* Position
-* Interview date
-* Interview type
-* Notes
-* Related application
-
-### 🏢 Company Tracking
-
-Companies are automatically derived from the user's applications, making it easy to see where applications have been submitted without maintaining a separate company database.
-
-### 👤 User Profiles
-
-Each account has its own profile containing:
-
-* Name
-* Email
-* Country
-* Profile photo
-* Display name
-
-### 🔐 Secure Multi-User Architecture
-
-JobTrack is designed for multiple users from the beginning.
-
-Every authenticated user receives a unique Firebase UID.
-
-```text
-User A
-   │
-   └── Firebase UID A
-          │
-          └── Applications A
-
-
-User B
-   │
-   └── Firebase UID B
-          │
-          └── Applications B
-```
-
-Users can only access their own data.
-
----
-
-# 🏗️ Architecture
-
-```text
-                    ┌─────────────────────┐
-                    │      React App      │
-                    │ TypeScript + Vite   │
-                    └──────────┬──────────┘
-                               │
-                    Firebase Client SDK
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │ Firebase Auth       │
-                    │                     │
-                    │ User Authentication │
-                    └──────────┬──────────┘
-                               │
-                         Firebase ID Token
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │      Go REST API    │
-                    │                     │
-                    │ Authentication      │
-                    │ Middleware           │
-                    │ Handlers              │
-                    │ Services              │
-                    │ Repositories         │
-                    └──────────┬──────────┘
-                               │
-                       Firebase Admin SDK
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │    Cloud Firestore  │
-                    │                     │
-                    │ User-scoped data    │
-                    └─────────────────────┘
-```
-
----
-
-# 🛠️ Tech Stack
-
-## Frontend
-
-| Technology   | Purpose                     |
-| ------------ | --------------------------- |
-| React        | UI                          |
-| TypeScript   | Type safety                 |
-| Vite         | Development & build tooling |
-| React Router | Application routing         |
-| Firebase SDK | Authentication              |
-| CSS          | Styling                     |
-
-## Backend
-
-| Technology         | Purpose                    |
-| ------------------ | -------------------------- |
-| Go                 | REST API                   |
-| `net/http`         | HTTP server                |
-| Firebase Admin SDK | Authentication & Firestore |
-| Firestore          | Database                   |
-| Docker             | Containerization           |
-
-## Development
-
-| Tool     | Purpose                            |
-| -------- | ---------------------------------- |
-| Git      | Version control                    |
-| GitHub   | Source control                     |
-| Postman  | API testing                        |
-| Firebase | Authentication, database & hosting |
-
----
-
-# 📁 Project Structure
-
-```text
-jobtrack/
-│
+.
 ├── backend/
-│   ├── cmd/
-│   │   └── server/
-│   │
-│   ├── internal/
-│   │   ├── config/
-│   │   ├── handlers/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── repositories/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   └── utils/
-│   │
-│   ├── firebase/
-│   ├── Dockerfile
-│   ├── go.mod
-│   └── go.sum
-│
+│   ├── cmd/server/              Go API entry point
+│   ├── firebase/                Firebase Admin initialization
+│   └── internal/
+│       ├── config/              Environment configuration
+│       ├── handlers/             HTTP handlers
+│       ├── middleware/           Firebase token and CORS middleware
+│       ├── models/               Domain models
+│       ├── repositories/         Firestore repository layer
+│       ├── routes/                API route registration
+│       ├── services/              Business logic
+│       └── utils/                HTTP response and validation helpers
 ├── frontend/
-│   ├── public/
 │   ├── src/
-│   │   ├── components/
-│   │   ├── context/
-│   │   ├── data/
-│   │   ├── hooks/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── styles/
-│   │   └── types/
-│   │
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── vite.config.ts
-│
-├── docs/
-│   ├── ARCHITECTURE.md
-│   ├── API.md
-│   ├── DATABASE.md
-│   ├── DEVELOPMENT.md
-│   └── DEPLOYMENT.md
-│
-├── .github/
-│   ├── workflows/
-│   │   ├── frontend.yml
-│   │   └── backend.yml
-│   ├── ISSUE_TEMPLATE.md
-│   └── pull_request_template.md
-│
-├── firestore.rules
-├── firestore.indexes.json
-├── firebase.json
-├── docker-compose.yml
-├── .env.example
-├── .gitignore
-├── LICENSE
+│   │   ├── components/           Reusable UI components
+│   │   ├── context/              Authentication and profile state
+│   │   ├── data/                 Development fallback data
+│   │   ├── hooks/                React hooks
+│   │   ├── pages/                Application pages
+│   │   ├── services/             Firebase and data services
+│   │   ├── styles/               CSS stylesheets
+│   │   └── types/                Shared TypeScript types
+│   └── package.json
+├── docs/                         Project documentation
+├── firebase.json                 Hosting and Firestore configuration
+├── firestore.rules               Firestore security rules
+├── docker-compose.yml             Local API container configuration
 └── README.md
 ```
 
----
-
-# 🔐 Security Model
-
-Security is a core part of JobTrack's architecture.
-
-The frontend authenticates users using Firebase Authentication.
-
-The resulting Firebase ID token is sent to the Go API:
-
-```http
-Authorization: Bearer <firebase-id-token>
-```
-
-The Go backend verifies the token before processing protected requests.
-
-```text
-React
-  │
-  │ Firebase ID Token
-  ▼
-Go Authentication Middleware
-  │
-  │ Verify token
-  ▼
-Firebase UID
-  │
-  ▼
-User-scoped Firestore operation
-```
-
-### Important security principles
-
-* 🔒 Firebase ID tokens are verified by the backend.
-* 🔒 User IDs are derived from the verified token.
-* 🔒 The API does not trust a client-provided `userId`.
-* 🔒 Firestore data is organized by Firebase UID.
-* 🔒 Users cannot access another user's applications.
-* 🔒 Admin credentials are never exposed to the frontend.
-* 🔒 Service-account credentials are never committed to Git.
-* 🔒 Production authenticated requests should not use wildcard CORS.
-
----
-
-# 🗄️ Firestore Structure
-
-JobTrack uses a user-scoped Firestore structure:
-
-```text
-users/
-  {firebaseUid}/
-      profile
-
-      applications/
-          {applicationId}
-
-      interviews/
-          {interviewId}
-```
-
-This structure makes ownership explicit.
-
-For example:
-
-```text
-users/
-  abc123/
-      applications/
-          application001
-          application002
-
-  xyz789/
-      applications/
-          application003
-```
-
-User `abc123` must never be able to retrieve `xyz789`'s applications.
-
----
-
-# 🔌 API
-
-Base URL during development:
-
-```text
-http://localhost:8080
-```
-
-## Health
-
-```http
-GET /health
-```
-
-Example response:
-
-```json
-{
-  "status": "ok",
-  "service": "jobtrack-api"
-}
-```
-
-## Applications
-
-```http
-GET    /api/v1/applications
-POST   /api/v1/applications
-GET    /api/v1/applications/{id}
-PUT    /api/v1/applications/{id}
-DELETE /api/v1/applications/{id}
-```
-
-## Interviews
-
-```http
-GET    /api/v1/interviews
-POST   /api/v1/interviews
-GET    /api/v1/interviews/{id}
-PUT    /api/v1/interviews/{id}
-DELETE /api/v1/interviews/{id}
-```
-
-## Dashboard
-
-```http
-GET /api/v1/dashboard/stats
-```
-
-## Profile
-
-```http
-GET /api/v1/profile
-PUT /api/v1/profile
-```
-
----
-
-# 📦 API Response Format
-
-Successful responses use:
-
-```json
-{
-  "data": {}
-}
-```
-
-Errors use:
-
-```json
-{
-  "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "Company is required"
-  }
-}
-```
-
----
-
-# 🚀 Getting Started
-
 ## Prerequisites
 
-Make sure you have:
+Install the following before running the project:
 
-* Node.js 20+
-* npm
-* Go 1.22+
-* Git
-* Firebase project
-* Firebase Authentication enabled
-* Cloud Firestore enabled
+- Node.js 20.19+ or 22.12+
+- npm
+- Go 1.22+ for the backend
+- Firebase CLI
+- A Firebase project with Authentication and Firestore enabled
+- Docker Desktop, optional for running the API in a container
 
----
-
-## 1. Clone the repository
+Install the Firebase CLI if needed:
 
 ```bash
-git clone https://github.com/tonydev-star/jobtrack.git
-
-cd jobtrack
+npm install -g firebase-tools
+firebase login
 ```
 
----
+## Firebase Setup
 
-# 🎨 Frontend Setup
+The current Firebase project is `job-tracker-77`.
 
-Navigate to the frontend:
+Enable these Firebase services in the Firebase Console:
 
-```bash
-cd frontend
-```
+1. Authentication → Sign-in method → Email/Password
+2. Firestore Database
+3. Firebase Hosting
 
-Install dependencies:
-
-```bash
-npm install
-```
-
-Install Firebase:
-
-```bash
-npm install firebase
-```
-
-Create your environment file:
-
-```bash
-cp .env.example .env
-```
-
-Configure your Firebase client variables.
-
-Example:
+The frontend uses the Firebase Web SDK. Web configuration values are expected in `frontend/.env.local` and must use the `VITE_` prefix:
 
 ```env
-VITE_FIREBASE_API_KEY=your-api-key
+VITE_FIREBASE_API_KEY=your-web-api-key
 VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
 VITE_FIREBASE_PROJECT_ID=your-project-id
 VITE_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
-VITE_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+VITE_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
 VITE_FIREBASE_APP_ID=your-app-id
+VITE_FIREBASE_MEASUREMENT_ID=your-measurement-id
 ```
 
-Start the development server:
+The frontend Firebase configuration is public by design. Never place Firebase Admin service-account JSON, private keys, or backend secrets in `frontend/.env.local` or the frontend source.
+
+## Run the Frontend
+
+From the repository root:
 
 ```bash
+cd frontend
+npm install
 npm run dev
 ```
 
-The frontend will normally be available at:
+Vite normally starts at `http://localhost:5173`. If that port is already in use, Vite selects the next available port.
 
-```text
-http://localhost:5173
-```
-
----
-
-# ⚙️ Backend Setup
-
-Open another terminal:
-
-```bash
-cd backend
-```
-
-Install Go dependencies:
-
-```bash
-go mod tidy
-```
-
-Create your environment configuration:
-
-```env
-PORT=8080
-ENVIRONMENT=development
-FRONTEND_URL=http://localhost:5173
-FIREBASE_PROJECT_ID=your-project-id
-GOOGLE_APPLICATION_CREDENTIALS=path/to/service-account.json
-```
-
-Run the API:
-
-```bash
-go run ./cmd/server
-```
-
-The backend will run on:
-
-```text
-http://localhost:8080
-```
-
-Test the health endpoint:
-
-```bash
-curl http://localhost:8080/health
-```
-
-Expected response:
-
-```json
-{
-  "status": "ok",
-  "service": "jobtrack-api"
-}
-```
-
----
-
-# 🧪 Testing
-
-Run backend tests:
-
-```bash
-cd backend
-go test ./...
-```
-
-Build the backend:
-
-```bash
-go build ./...
-```
-
-Build the frontend:
+Build the production frontend:
 
 ```bash
 cd frontend
 npm run build
 ```
 
----
+The compiled static files are written to `frontend/dist`.
 
-# 🐳 Docker
-
-Build the backend image:
+Preview the production build locally:
 
 ```bash
-docker build -t jobtrack-api ./backend
+cd frontend
+npm run preview
 ```
 
-Run the container:
+## Run the Go API
 
-```bash
-docker run -p 8080:8080 jobtrack-api
+The backend requires Firebase Admin credentials. Set `GOOGLE_APPLICATION_CREDENTIALS` to the path of a service-account JSON file, or use another Google Application Default Credentials setup.
+
+PowerShell example:
+
+```powershell
+$env:FIREBASE_PROJECT_ID = "job-tracker-77"
+$env:GOOGLE_APPLICATION_CREDENTIALS = "C:\path\to\firebase-service-account.json"
+$env:FRONTEND_URL = "http://localhost:5173"
+$env:PORT = "8080"
+$env:ENVIRONMENT = "development"
+
+cd backend
+go run ./cmd/server
 ```
 
-For local development with multiple services:
+The API listens on `http://localhost:8080` by default.
 
-```bash
-docker compose up
-```
-
----
-
-# 🌍 Deployment Architecture
-
-The production architecture separates frontend hosting from the Go API:
+Health check:
 
 ```text
-                 Internet
-                    │
-          ┌─────────┴─────────┐
-          │                   │
-          ▼                   ▼
-   Firebase Hosting      Go API Server
-          │                   │
-          ▼                   ▼
-     React App          Firebase Admin
-                              │
-                              ▼
-                         Firestore
+GET http://localhost:8080/health
 ```
 
-The frontend can be deployed through Firebase Hosting while the Go backend can run on a container-compatible backend platform.
+## Run the API with Docker
 
----
-
-# 🗺️ Roadmap
-
-### ✅ Phase 1 — Foundation
-
-* [x] React + TypeScript frontend
-* [x] Vite setup
-* [x] Application dashboard
-* [x] Application management UI
-* [x] Interview management UI
-* [x] Profile & settings UI
-* [x] Go backend architecture
-* [x] Firebase architecture
-* [x] Multi-user data model
-
-### 🚧 Phase 2 — Backend Integration
-
-* [ ] Firebase Authentication integration
-* [ ] Firebase ID-token verification
-* [ ] Application CRUD API
-* [ ] Interview CRUD API
-* [ ] Profile API
-* [ ] Dashboard statistics API
-* [ ] Firestore integration
-* [ ] Frontend API integration
-
-### 🔜 Phase 3 — Production
-
-* [ ] Production deployment
-* [ ] CI/CD
-* [ ] Automated testing
-* [ ] Production monitoring
-* [ ] Error tracking
-* [ ] Performance optimization
-
-### 💡 Future Ideas
-
-* 📧 Application follow-up reminders
-* 📅 Calendar integration
-* 📎 Resume attachment tracking
-* 📈 Application analytics
-* 🔔 Interview reminders
-* 🧠 AI-powered application insights
-* 📊 Job-search reports
-* 🌐 Browser extension
-* 📱 Mobile application
-
----
-
-# 🤝 Contributing
-
-Contributions are welcome.
-
-1. Fork the repository.
-2. Create a feature branch.
+From the repository root:
 
 ```bash
-git checkout -b feature/your-feature
+docker compose up --build
 ```
 
-3. Make your changes.
-4. Run tests.
+The compose file exposes the API at `http://localhost:8080`. Configure `FIREBASE_PROJECT_ID` and `GOOGLE_APPLICATION_CREDENTIALS` in the shell or an environment file before starting the container.
+
+## API Endpoints
+
+All `/api/` routes require a Firebase ID token in the request header:
+
+```http
+Authorization: Bearer <firebase-id-token>
+```
+
+### Public
+
+| Method | Route | Purpose |
+| --- | --- | --- |
+| GET | `/health` | Check whether the API is running |
+
+### Protected
+
+| Method | Route | Purpose |
+| --- | --- | --- |
+| GET | `/api/v1/applications` | List the signed-in user's applications |
+| POST | `/api/v1/applications` | Create an application |
+| GET | `/api/v1/applications/{id}` | Get one application |
+| PUT | `/api/v1/applications/{id}` | Update an application |
+| DELETE | `/api/v1/applications/{id}` | Delete an application |
+| GET | `/api/v1/interviews` | List the signed-in user's interviews |
+| POST | `/api/v1/interviews` | Create an interview |
+| GET | `/api/v1/interviews/{id}` | Get one interview |
+| PUT | `/api/v1/interviews/{id}` | Update an interview |
+| DELETE | `/api/v1/interviews/{id}` | Delete an interview |
+| GET | `/api/v1/profile` | Get the signed-in user's profile |
+| PUT | `/api/v1/profile` | Update the signed-in user's profile |
+| GET | `/api/v1/dashboard/stats` | Get application dashboard statistics |
+
+## Data Model
+
+User profiles are stored at:
+
+```text
+users/{uid}
+```
+
+Example profile fields:
+
+```json
+{
+	"uid": "firebase-user-id",
+	"firstName": "Alex",
+	"lastName": "Morgan",
+	"displayName": "Alex Morgan",
+	"email": "alex@example.com",
+	"country": "United States",
+	"photoURL": "",
+	"notificationPreferences": {
+		"interviewReminders": true,
+		"weeklySummary": true,
+		"productUpdates": false
+	}
+}
+```
+
+Applications are stored in the `applications` collection and include a `userId` field that matches the Firebase UID. Interviews use the same ownership pattern in the `interviews` collection.
+
+## Security
+
+Firestore rules require an authenticated Firebase user. User documents can only be accessed by the matching UID. Applications and interviews can only be created, read, changed, or deleted when their `userId` belongs to the signed-in user.
+
+Deploy the rules with:
 
 ```bash
+firebase deploy --only firestore
+```
+
+Do not commit:
+
+- `frontend/.env.local`
+- Firebase service-account JSON files
+- Private keys
+- API tokens
+- Production credentials
+
+The Firebase web API key may appear in the browser bundle, but restrict it in Google Cloud Console by HTTP referrer and allowed APIs for production use.
+
+## Deploy to Firebase Hosting
+
+The repository is configured to deploy the Vite output from `frontend/dist`.
+
+```bash
+cd frontend
+npm install
+npm run build
+
+cd ..
+firebase deploy --only hosting,firestore
+```
+
+The current production URL is:
+
+https://job-tracker-77.web.app
+
+The SPA rewrite in `firebase.json` sends application routes such as `/applications`, `/profile`, and `/settings` back to `index.html` so React Router can handle them.
+
+## Testing and Validation
+
+Frontend TypeScript check:
+
+```bash
+cd frontend
+npx tsc -b
+```
+
+Frontend production build:
+
+```bash
+cd frontend
+npm run build
+```
+
+Backend tests:
+
+```bash
+cd backend
 go test ./...
 ```
 
-5. Commit your changes.
+Before releasing, test registration, login, password reset, profile loading, country detection, application CRUD, notification persistence, logout, and direct navigation to nested routes.
 
-```bash
-git commit -m "feat: add your feature"
-```
+## Current Architecture Notes
 
-6. Push your branch.
+The frontend currently uses the Firebase Web SDK directly for authentication, profile synchronization, notification preferences, and application CRUD. The Go API includes the protected service architecture and routes for the same domain areas, but the frontend is not yet required to proxy every operation through the Go API.
 
-```bash
-git push origin feature/your-feature
-```
+This allows the deployed frontend to work with Firebase Hosting and Firestore immediately while keeping the Go API available as the server-side integration layer for future consolidation.
 
-7. Open a Pull Request.
+## License
 
----
-
-# 📄 License
-
-This project is licensed under the **MIT License**.
-
-See [`LICENSE`](LICENSE) for details.
-
----
-
-# 👨‍💻 Author
-
-**Antony Wanjiru**
-
-Full-Stack Software Engineer building modern web, mobile, backend, and AI-powered applications.
-
-### Connect
-
-* 💼 LinkedIn: [Antony Wanjiru](https://linkedin.com/in/antonywanjiru-5976b022a)
-* 🐙 GitHub: [@tonydev-star](https://github.com/tonydev-star)
-* 🌐 Portfolio: [antony-software-engineer.web.app](https://antony-software-engineer.web.app/)
-
----
-
-## ⭐ Support the Project
-
-If JobTrack is useful or interesting to you, consider giving the repository a ⭐.
-
-```text
-Built with React + TypeScript + Go + Firebase
-Designed for real-world job searching.
-```
+See [LICENSE](LICENSE).
